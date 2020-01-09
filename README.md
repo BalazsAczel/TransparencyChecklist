@@ -37,7 +37,7 @@ Feedback and recommendations for an update of the checklist can be provided here
 
 You can cite the Transparency Checklist as follows: 
 
-Aczel, B., Szaszi, B., Sarafoglou, A. Kekecs, Z., Kucharský, Š., Benjamin, D., ... & Wagenmakers, E.-J. (2019). A consensus-based transparency checklist. *Nature Human Behavior*, 1--3. doi:10.1038/s41562-019-0772-6
+Aczel, B., Szaszi, B., Sarafoglou, A. Kekecs, Z., Kucharský, Š., Benjamin, D., ... & Wagenmakers, E.-J. (2019). A consensus-based transparency checklist. *Nature Human Behavior*, 1--3. [doi:10.1038/s41562-019-0772-6](https://doi.org/10.1038/s41562-019-0772-6)
 
 BibTeX entry:
 
