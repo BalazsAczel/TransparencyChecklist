@@ -1,7 +1,7 @@
 ## Functions which help us to create some structure of the shiny app
 ## and defines the buttons which appear horizontal
 
-renderSection <- function(section){
+renderSection <- function(section, answers = NULL){
   # creates a tab ( can be changed to a fluidrow if we do not want tabs)
   
   tabPanel(title = i18n$t(section$Name), 
@@ -13,12 +13,12 @@ renderSection <- function(section){
     fluidRow(column(1),
              column(10,
                     #h3(section$Name),
-                    if(!is.null(section$Label)) strong(i18n$t(section$Label))
+                    ifelse(!is.null(section$Label), strong(i18n$t(section$Label)), "")
                     ),
              column(1)),
 
     # render all fields within this section
-    lapply(section$Questions, customField),
+    lapply(section$Questions, customField, answers = answers),
     
     # a break line after each section
     fluidRow(hr())
@@ -26,8 +26,8 @@ renderSection <- function(section){
   
 }
 
-customField <- function(ind){
-  # is the input is not question, it is assumed that it is some quidance text in between the items
+customField <- function(ind, answers = NULL){
+  # if the input is not a question, it is assumed that it is some guidance text in between the items
   if(ind$Type == "text"){
     
     # the guidance text can itself be conditional
@@ -43,12 +43,12 @@ customField <- function(ind){
                        )
     }
   } else { # render questions
-    customButton(ind)
+    customButton(ind, answers)
   }
 }
 
 
-customButton <- function(ind){
+customButton <- function(ind, answers = NULL){
     
   # Always display unconditional items  
   if(is.null(ind$Depends)){
@@ -57,15 +57,15 @@ customButton <- function(ind){
     ind$Depends <- gsub(pattern = "\\.", replacement = "input.", ind$Depends)
   }
   
-  
-  if(ind$Type != "comment"){ # when the item is not a comment, show the button in a 6:4 format (label: button)
+  if(ind$Type != "comment"){ # when the item is not a comment, show the button in a 6:3:1 format (label:button:validation)
+    
     fluidPage( # wrapping into another fluid page makes a slight indentation of the questions from the text fields
     conditionalPanel(condition = ind$Depends,
                      fluidRow(column(1),
-                              column(6, br(), i18n$t(ind$Label), 
-                                     a(ind$href, href = ind$href, target = "_blank"),
-                                     ind$LabelEnd), # this makes the buttons appear horizonally aligned
-                              column(3, switchButtons(ind)), # create a standard shiny button
+                              column(6, br(), i18n$t(ind$Label)),#, 
+                                     #a(ind$href, href = ind$href, target = "_blank"),
+                                     #ind$LabelEnd), # this makes the buttons appear horizonally aligned
+                              column(3, switchButtons(ind, answers)), # create a standard shiny button
                               column(1, br(), # adds exclamation circle next to the item
                                      tags$div(
                                        id = paste0("div", ind$Name, "Checker"),
@@ -92,31 +92,39 @@ customButton <- function(ind){
 }
 
 
-switchButtons <- function(ind){
+switchButtons <- function(ind, answers = NULL){
   # if the AnswerType is specified in the answerList object (from .json), the button options should be rendered from 
   # those options
   # otherwise, the AnswerType is passed directly to the options
   if(ind$AnswerType %in% names(answerList)){
-    answers <- answerList[[ind$AnswerType]]
+    answerOptions <- answerList[[ind$AnswerType]]
   } else{ 
-    answers <- ind$AnswerType
+    answerOptions <- ind$AnswerType
+  }
+  # trans
+  if(is.list(answerOptions)){
+    names(answerOptions) <- lapply(names(answerOptions), i18n$t)
+  } else{
+    answerOptions <- i18n$t(answerOptions)
   }
   
-  if(is.list(answers)){
-    names(answers) <- lapply(names(answers), i18n$t)
+  # preserve selected values if translation was called
+  answered <- ind$Name %in% names(answers)
+  if(answered){
+    selected <- answers[[ind$Name]]
   } else{
-    answers <- i18n$t(answers)
+    selected <- NULL
   }
   
   # switch between different input types
   switch (ind$Type,
-    "select"    = pickerInput(inputId = ind$Name, label = "", choices = c("", answers),
-                              selected = NULL, multiple = FALSE,
+    "select"    = pickerInput(inputId = ind$Name, label = "", choices = c("", answerOptions),
+                              selected = selected, multiple = FALSE,
                               options = pickerOptions(noneSelectedText = i18n$t("Please select an option"))),
-    "radio"     = radioButtons(inputId = ind$Name, label = "", choices = answers, selected = 0,
+    "radio"     = radioButtons(inputId = ind$Name, label = "", choices = answerOptions, selected = ifelse(is.null(selected), 0, selected),
                                inline = TRUE),
-    "textInput" = textInput(inputId = ind$Name, label = i18n$t(ind$Label), value = i18n$t(ind$AnswerType)),
-    "textArea"  = textAreaInput(inputId = ind$Name, label = "", placeholder =  answers, rows = 6)
+    "textInput" = textInput(inputId = ind$Name, label = i18n$t(ind$Label), value = ifelse(is.null(selected), i18n$t(ind$AnswerType), selected)),
+    "textArea"  = textAreaInput(inputId = ind$Name, label = "", placeholder = answerOptions, rows = 6, value = ifelse(is.null(selected), "", selected))
   )
 }
 

@@ -79,42 +79,42 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   absolutePanel(
     dropdown(
       #h4("Generate & Download Report"),
-      h4(uiOutput("generateDownloadReportLabel")),
-      pickerInput(inputId = "save.as", label = uiOutput("formatLabel"), 
+      h4(textOutput("generateDownloadReportLabel", inline=TRUE)),
+      pickerInput(inputId = "save.as", label = textOutput("formatLabel", inline=TRUE), 
                   choices = c("pdf", "html", "word", "rtf"), 
                   multiple = FALSE, width = 'auto', inline = FALSE),
       div(style = "display:inline-block",
-        actionBttn(inputId = "preview", label = uiOutput("previewLabel"), icon = icon("eye"),
+        actionBttn(inputId = "preview", label = textOutput("previewLabel", inline=TRUE), icon = icon("eye"),
                    style = "simple",
                    color = "primary",
                    size = "xs",
                    no_outline = FALSE),# br(), br(), 
-        actionBttn(inputId = "showcode", label = uiOutput("showCodeLabel"), icon = icon("code"),
+        actionBttn(inputId = "showcode", label = textOutput("showCodeLabel", inline=TRUE), icon = icon("code"),
                    style = "simple",
                    color = "primary",
                    size = "xs",
                    no_outline = FALSE)
         ), br(), br(),
-      downloadButton('report', uiOutput('downloadLabel'), class = "downbutt"),
+      downloadButton('report', textOutput('downloadLabel', inline=TRUE), class = "downbutt"),
       
       icon = icon("file-alt"), up = TRUE, 
-      tooltip = tooltipOptions(title = uiOutput("clickToDownloadLabel"), placement = "left"),
-      style = "unite", label = uiOutput("generateReportLabel"),
+      tooltip = tooltipOptions(title = textOutput("clickToDownloadLabel", inline=TRUE), placement = "left", html=TRUE),
+      style = "unite", label = textOutput("generateReportLabel", inline=TRUE),
       size = "lg", inputId = "generatereport", width = "20vw", class = "fixedButton"),
     bottom = "2.5%", left = "50%", fixed = TRUE, width = "auto",
     style = "transform: translate(-50%, +0%); z-index: 1000;"),
   
   # Open window for a preview
-  shinyBS::bsModal(id = "previewer", title = uiOutput("previewLabel2"), trigger = "preview", size = "large",
+  shinyBS::bsModal(id = "previewer", title = textOutput("previewLabel2", inline=TRUE), trigger = "preview", size = "large",
                    shinycssloaders::withSpinner(uiOutput("generatePreview"))),
 
   # Open window for a code
-  shinyBS::bsModal(id = "codeshower", title = uiOutput("codeLabel"), trigger = "showcode", size = "large",
+  shinyBS::bsModal(id = "codeshower", title = textOutput("codeLabel", inline=TRUE), trigger = "showcode", size = "large",
                    shinycssloaders::withSpinner(verbatimTextOutput("code"))),
 
   # Show tooltip which says that the download is not ready
   shinyBS::bsTooltip(id = "report",
-                     title = uiOutput("reportDownloadableLabel"),
+                     title = textOutput("reportDownloadableLabel", inline=TRUE),
                      # Please, respond to all displayed items to download the pdf report (comments are optional).
                      trigger = "manual",
                      placement = "right"),
@@ -122,18 +122,19 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   br(), br(),
 
   # info modal
-  shinyBS::bsModal(id = "intro", title = uiOutput("aboutLabel"), trigger = "triggerIntro", size = "large",
-                   includeMarkdown("www/doc/introText.Rmd"),
+  shinyBS::bsModal(id = "intro", title = textOutput("aboutLabel", inline=TRUE), trigger = "triggerIntro", size = "large",
+                   #includeMarkdown("www/doc/introText.Rmd"),
+                   uiOutput("introText"),
                    br(),
                    tags$a(tags$img(src = "img/GitHub-Mark-32px.png"),
                           href = "https://github.com/BalazsAczel/TransparencyChecklist",
                           target = "_blank")),
   absolutePanel(
-    actionBttn(inputId = "triggerIntro", label = "About", icon = icon("info-circle")),
+    actionBttn(inputId = "triggerIntro", label = textOutput("aboutLabel2", inline=TRUE), icon = icon("info-circle")),
     top = "3%", left = "2%", fixed = TRUE, width = "auto"
   )
-  # temporary (for debugging): showing the current status of the answers
-  # ,br(),
-  # verbatimTextOutput("answers")
+  #temporary (for debugging): showing the current status of the answers
+  ,br(),
+  verbatimTextOutput("answers")
   )
 )
