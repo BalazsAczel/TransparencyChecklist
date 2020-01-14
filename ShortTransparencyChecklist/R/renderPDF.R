@@ -54,31 +54,35 @@ composePDF <- function(answers = NULL, sectionsList = NULL, headList = NULL, ans
   headYaml <- 
 "---
 title: '&studyTitle'
-subtitle: 'Transparency Report 1.0 (short, 12 items)'
+subtitle: '&subTitle'
 author: '&authorNames'
 date: '&date'
 output: pdf_document
 ---
   
-Corresponding author's email address: [&correspondingEmail](&correspondingEmail)
+&corrAuthorsLabel: [&correspondingEmail](&correspondingEmail)
   
-Link to Project Repository: [&linkToRepository](&linkToRepository)
+&linkToRepoLabel: [&linkToRepository](&linkToRepository)
 "
 
-  # and fill the header with information taken from the question in the head
-  date <- format(Sys.time(), '%d %B, %Y')
-  answers$studyTitle <- ifelse(answers$studyTitle == "", "Untitled", answers$studyTitle)
   
-  headYaml <- gsub("&studyTitle",         answers$studyTitle,         headYaml)
-  headYaml <- gsub("&authorNames",        answers$authorNames,        headYaml)
-  headYaml <- gsub("&correspondingEmail", answers$correspondingEmail, headYaml)
-  headYaml <- gsub("&linkToRepository",   answers$linkToRepository,   headYaml)
-  headYaml <- gsub("&date",               date,                       headYaml)
+  # and fill the header with information taken from the question in the head
+  date <- format(Sys.time(), '%d/%M/%Y')
+  answers$studyTitle <- ifelse(answers$studyTitle == "", i18n$t("Untitled"), answers$studyTitle)
+  
+  headYaml <- gsub("&studyTitle",         answers$studyTitle,                                  headYaml)
+  headYaml <- gsub("&authorNames",        answers$authorNames,                                 headYaml)
+  headYaml <- gsub("&correspondingEmail", answers$correspondingEmail,                          headYaml)
+  headYaml <- gsub("&linkToRepository",   answers$linkToRepository,                            headYaml)
+  headYaml <- gsub("&date",               date,                                                headYaml)
+  headYaml <- gsub("&subTitle",           i18n$t("Transparency Report 1.0 (short, 12 items)"), headYaml)
+  headYaml <- gsub("&corrAuthorsLabel",   i18n$t("Corresponding author's email address"),     headYaml)
+  headYaml <- gsub("&linkToRepoLabel",    i18n$t("Link to Project Repository"),               headYaml)
   
   # fill in answers with "not answered" - important for generating the files
   bundleQuestions <- getItemList(sectionsList)
   not.answered <- !bundleQuestions %in% names(answers)
-  answers[bundleQuestions[not.answered]] <- "Not answered"
+  answers[bundleQuestions[not.answered]] <- i18n$t("Not answered")
   
   # We create sections of the rmd file
   sections <- sapply(sectionsList, composeSections, answers = answers)
@@ -112,11 +116,11 @@ composeSections <- function(section, answers = NULL){
   questions <- sapply(section$Questions, composeQuestions, answers = answers)
   
   # Fill in the section Name, the text, and the generated questions
-  body <- gsub("&SectionName", section$Name, body)
+  body <- gsub("&SectionName", i18n$t(section$Name), body)
   if(is.null(section$Label) || section$Label == ""){
     body <- gsub("\\*\\*&SectionLabel\\*\\*", "", body)
   } else{
-    body <- gsub("&SectionLabel", section$Label, body)
+    body <- gsub("&SectionLabel", i18n$t(section$Label), body)
   }
   body <- gsub("&Questions", paste(questions, collapse = " \n"), body)
   
@@ -158,9 +162,9 @@ composeQuestions <- function(question, answers = answers){
   
   # make answers bold, but if it is a comment, show it as a quote:
   if( !(question$Type %in% c("comment", "text"))){
-    answer <- paste0(" &escape&textbf{", answers[[question$Name]], "} ")
+    answer <- paste0(" &escape&textbf{", i18n$t(answers[[question$Name]]), "} ")
   } else if(question$Type == "comment"){
-    answer <- ifelse(answers[[question$Name]] == "", "No comments.", answers[[question$Name]]) # If the comment box is empty
+    answer <- ifelse(answers[[question$Name]] == "", i18n$t("No comments."), answers[[question$Name]]) # If the comment box is empty
     answer <- paste0("\n\n> ", answer)
   } else{
     answer <- ""
@@ -176,12 +180,12 @@ composeQuestions <- function(question, answers = answers){
   }
   
   if( !(question$Type %in% c("comment", "text"))){
-    label <- paste0(" ", question$Label, " &escape&hfill")
+    label <- paste0(" ", i18n$t(question$Label), " &escape&hfill")
   } else if(question$Type == "text" || (question$Type == "comment" && question$Label != "Explain")){
     if(question$Label == ""){
       label <- paste0("\n")
     } else{
-      label <- paste0("**", question$Label, "**")
+      label <- paste0("**", i18n$t(question$Label), "**")
     }
   } else{
     label <- ""
@@ -211,9 +215,11 @@ composeQuestions <- function(question, answers = answers){
 }
 
 renderReferences <- function(){
-  "
-## References
+out <- "
+## &Refs
  
 Aczel, B., Szaszi, B., Sarafoglou, A. Kekecs, Z., Kucharský, Š., Benjamin, D., ... & Wagenmakers, E.-J. (2019). A consensus-based transparency checklist. *Nature Human Behaviour*, 1--3. doi:10.1038/s41562-019-0772-6
 "
+
+  gsub("&Refs", i18n$t("References"), out)
 }

@@ -13,7 +13,7 @@ renderSection <- function(section, answers = NULL){
     fluidRow(column(1),
              column(10,
                     #h3(section$Name),
-                    ifelse(!is.null(section$Label), strong(i18n$t(section$Label)), "")
+                    if(!is.null(section$Label)) {strong(i18n$t(section$Label))}
                     ),
              column(1)),
 
