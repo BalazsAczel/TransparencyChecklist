@@ -4,7 +4,7 @@
 renderSection <- function(section){
   # creates a tab ( can be changed to a fluidrow if we do not want tabs)
   
-  tabPanel(title = section$Name, 
+  tabPanel(title = i18n$t(section$Name), 
            value = section$Value, 
            icon  = tags$i(class = paste0("icon", section$Value, " fa fa-eye")),#icon("table"),
            #id    = section$Value,
@@ -13,7 +13,7 @@ renderSection <- function(section){
     fluidRow(column(1),
              column(10,
                     #h3(section$Name),
-                     strong(section$Label)
+                    if(!is.null(section$Label)) strong(i18n$t(section$Label))
                     ),
              column(1)),
 
@@ -30,15 +30,15 @@ customField <- function(ind){
   # is the input is not question, it is assumed that it is some quidance text in between the items
   if(ind$Type == "text"){
     
-    # the quidance text can itself be conditional
+    # the guidance text can itself be conditional
     if(is.null(ind$Depends)){
       fluidRow(column(1),
-               column(10, br(), strong(ind$Label)),
+               column(10, br(), strong(i18n$t(ind$Label))),
                column(1))
     } else{
       conditionalPanel(condition = gsub(pattern = "\\.", replacement = "input.", ind$Depends),
                        fluidRow(column(1), 
-                                column(10, br(), strong(ind$Label)),
+                                column(10, br(), strong(i18n$t(ind$Label))),
                                 column(1))
                        )
     }
@@ -62,14 +62,14 @@ customButton <- function(ind){
     fluidPage( # wrapping into another fluid page makes a slight indentation of the questions from the text fields
     conditionalPanel(condition = ind$Depends,
                      fluidRow(column(1),
-                              column(6, br(), ind$Label, 
+                              column(6, br(), i18n$t(ind$Label), 
                                      a(ind$href, href = ind$href, target = "_blank"),
                                      ind$LabelEnd), # this makes the buttons appear horizonally aligned
                               column(3, switchButtons(ind)), # create a standard shiny button
                               column(1, br(), # adds exclamation circle next to the item
                                      tags$div(
                                        id = paste0("div", ind$Name, "Checker"),
-                                       title = "This question needs to be answered.",
+                                       title = i18n$t("This question needs to be answered."),
                                        tags$i(id = paste0(ind$Name, "Checker"),
                                               class = 'fa fa-exclamation-circle')
                                        )
@@ -82,7 +82,7 @@ customButton <- function(ind){
     #fluidPage(
       conditionalPanel(condition = ind$Depends,
                        fluidRow(column(1),
-                                column(10, br(), strong(ind$Label), br(),
+                                column(10, br(), strong(i18n$t(ind$Label)), br(),
                                        tags$style(type = "text/css", "textarea {width:80%}"),
                                        tags$textarea(id = ind$Name, placeholder = ind$AnswerType,
                                                      rows = 5, class = "form-control")),
@@ -102,14 +102,20 @@ switchButtons <- function(ind){
     answers <- ind$AnswerType
   }
   
+  if(is.list(answers)){
+    names(answers) <- lapply(names(answers), i18n$t)
+  } else{
+    answers <- i18n$t(answers)
+  }
+  
   # switch between different input types
   switch (ind$Type,
     "select"    = pickerInput(inputId = ind$Name, label = "", choices = c("", answers),
                               selected = NULL, multiple = FALSE,
-                              options = pickerOptions(noneSelectedText = "Please select an option")),
+                              options = pickerOptions(noneSelectedText = i18n$t("Please select an option"))),
     "radio"     = radioButtons(inputId = ind$Name, label = "", choices = answers, selected = 0,
                                inline = TRUE),
-    "textInput" = textInput(inputId = ind$Name, label = ind$Label, value = ind$AnswerType),
+    "textInput" = textInput(inputId = ind$Name, label = i18n$t(ind$Label), value = i18n$t(ind$AnswerType)),
     "textArea"  = textAreaInput(inputId = ind$Name, label = "", placeholder =  answers, rows = 6)
   )
 }

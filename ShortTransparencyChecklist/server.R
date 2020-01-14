@@ -13,16 +13,23 @@ shinyServer(function(input, output, session) {
     shinyBS::toggleModal(session, "intro")
   })
   
+  observe({
+    i18n$set_translation_language(input$language)
+  })
   # Deprecated rendering of sections (now created in global.R and passed in ui directly)
   # render the header section
-  # output$head <- renderUI({
-  #   headingHTML
-  # })
+  output$head <- renderUI({
+    reactTo <- input$language
+    lapply(headList, switchButtons)
+  })
   
   # render sections as tab sections
-  # output$questions <- renderUI({
-  #   sectionsHTML
-  # })
+  output$questions <- renderUI({
+    reactTo <- input$language
+    sectionsHTML <- lapply(sectionsList, renderSection)
+    names(sectionsHTML) <- NULL
+    do.call(tabsetPanel, c(sectionsHTML, id = "sections"))
+  })
   
   #### Store answers, check whether checklist is complete ----
   # stores the answers in a list
@@ -301,4 +308,44 @@ shinyServer(function(input, output, session) {
     }
   )
   
+  #### Translated buttons ----
+  inAppTexts <- reactive({
+    reactTo <- input$language
+    list(
+      applicationTitle            = i18n$t("CREATING TRANSPARENCY CHECKLIST 1.0 (short, 12 items)"),
+      preferenceOther             = i18n$t("I prefer to fill out the full (36-item) checklist."),
+      selectLanguage              = i18n$t("Select Language"),
+      generalInstruction          = i18n$t("Please select an answer for each item below. If you want to elaborate on your answers, you can do so in the comment box that follows each section."),
+      goToPrevious                = i18n$t("Go to previous section"),
+      goToNext                    = i18n$t("Go to next section"),
+      generateDownloadReportLabel = i18n$t("Generate & Download Report"),
+      formatLabel                 = i18n$t("Format"),
+      previewLabel                = i18n$t("Preview"),
+      showCodeLabel               = i18n$t("Show code"),
+      downloadLabel               = i18n$t("Download"),
+      clickToDownloadLabel        = i18n$t("Click here to create and download report"),
+      generateReportLabel         = i18n$t("Generate Report"),
+      previewLabel2               = i18n$t("Preview"),
+      codeLabel                   = i18n$t("Code"),
+      reportDownloadableLabel     = i18n$t("A report can be downloaded after all questions in each section have been answered."),
+      aboutLabel                  = i18n$t("About")
+    )
+  })
+  output$applicationTitle            <- renderText({ inAppTexts()$applicationTitle            })
+  output$preferenceOther             <- renderText({ inAppTexts()$preferenceOther             })
+  output$selectLanguage              <- renderText({ inAppTexts()$selectLanguage              })
+  output$generalInstruction          <- renderText({ inAppTexts()$generalInstruction          })
+  output$goToPrevious                <- renderText({ inAppTexts()$goToPrevious                })
+  output$goToNext                    <- renderText({ inAppTexts()$goToNext                    })
+  output$generateDownloadReportLabel <- renderText({ inAppTexts()$generateDownloadReportLabel })
+  output$formatLabel                 <- renderText({ inAppTexts()$formatLabel                 })
+  output$previewLabel                <- renderText({ inAppTexts()$previewLabel                })
+  output$showCodeLabel               <- renderText({ inAppTexts()$showCodeLabel               })
+  output$downloadLabel               <- renderText({ inAppTexts()$downloadLabel               })
+  output$clickToDownloadLabel        <- renderText({ inAppTexts()$clickToDownloadLabel        })
+  output$generateReportLabel         <- renderText({ inAppTexts()$generateReportLabel         })
+  output$previewLabel2               <- renderText({ inAppTexts()$previewLabel2               })
+  output$codeLabel                   <- renderText({ inAppTexts()$codeLabel                   })
+  output$reportDownloadableLabel     <- renderText({ inAppTexts()$reportDownloadableLabel     })
+  output$aboutLabel                  <- renderText({ inAppTexts()$aboutLabel                  })
 })
