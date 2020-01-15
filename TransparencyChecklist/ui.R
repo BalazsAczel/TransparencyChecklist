@@ -25,112 +25,114 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
     style = "display: none;",
     shiny::icon("user")
   ),
-
+  
+  
   #### Application outline ----
   # Application title
-  headerPanel(column(12, "CREATING TRANSPARENCY CHECKLIST 1.0 (full, 36 items)", align = "center"),
+  headerPanel(column(12, textOutput("applicationTitle", inline=TRUE), align = "center"),
               windowTitle = "Transparency Checklist 1.0"),
   
   fluidRow(column(1),
-           column(10, tags$a("I prefer to fill out the short (12-item) checklist.",
+           column(10, tags$a(textOutput("preferenceOther", inline=TRUE), 
                              href="http://www.shinyapps.org/apps/ShortTransparencyChecklist/",
                              target="_blank"), align = "center"),
            column(1)
   ),
-  br(),
-  
+  br(), 
   # The header (basic information about the paper and authors)
   fluidRow(
     column(1),
     column(10,
-      # wellPanel(h4(textOutput("currentTime")), br(), headHTML)),
-      wellPanel(headHTML)),
+      wellPanel(uiOutput("head"))),
     column(1)
   ),
-
+  
   # Show initial instructions:
   fluidRow(
     column(1),
-    column(10,
-           h3("Please select an answer for each item below.
-              If you want to elaborate on your answers, you can do so in the comment box that follows each section.")
+    column(10, 
+           h3(textOutput("generalInstruction", inline=TRUE))
            ),
     column(1)
   ),
-
+  
   br(), br(),
   tags$div(id = "scrollAnchor"), # for scrolling up
   # Show questions
-  #uiOutput("questions"),
-  sectionsHTML,
-
+  uiOutput("questions"),
+  
   # Switching between sections
   fluidRow(column(2),
            column(2, align = "center",
-                  actionButton("previousButton", "Go to previous section", icon = icon("arrow-circle-left"))),
+                  actionButton("previousButton", textOutput("goToPrevious", inline=TRUE), icon = icon("arrow-circle-left"))),
            column(4),
            column(2, align = "center",
-                  actionButton("nextButton", "Go to next section", icon = icon("arrow-circle-right"))),
+                  actionButton("nextButton", textOutput("goToNext", inline=TRUE), icon = icon("arrow-circle-right"))),
            column(2)
   ),
   br(), br(),
   ##### Report menu (downloading) ----
   absolutePanel(
     dropdown(
-      h4("Generate & Download Report"),
-      pickerInput(inputId = "save.as", label = "Format",
-                  choices = c("pdf", "html", "word", "rtf"),
+      #h4("Generate & Download Report"),
+      h4(textOutput("generateDownloadReportLabel", inline=TRUE)),
+      pickerInput(inputId = "save.as", label = textOutput("formatLabel", inline=TRUE), 
+                  choices = c("pdf", "html", "word", "rtf"), 
                   multiple = FALSE, width = 'auto', inline = FALSE),
       div(style = "display:inline-block",
-        actionBttn(inputId = "preview", label = "Preview", icon = icon("eye"),
+        actionBttn(inputId = "preview", label = textOutput("previewLabel", inline=TRUE), icon = icon("eye"),
                    style = "simple",
                    color = "primary",
                    size = "xs",
-                   no_outline = FALSE),# br(), br(),
-        actionBttn(inputId = "showcode", label = "Show code", icon = icon("code"),
+                   no_outline = FALSE),# br(), br(), 
+        actionBttn(inputId = "showcode", label = textOutput("showCodeLabel", inline=TRUE), icon = icon("code"),
                    style = "simple",
                    color = "primary",
                    size = "xs",
                    no_outline = FALSE)
         ), br(), br(),
-      downloadButton('report', 'Download', class = "downbutt"),
+      downloadButton('report', textOutput('downloadLabel', inline=TRUE), class = "downbutt"),
       
-      icon = icon("file-alt"), up = TRUE,
-      tooltip = tooltipOptions(title = "Click here to create and download report", placement = "left"),
-      style = "unite", label = "Generate Report",
+      icon = icon("file-alt"), up = TRUE, 
+      style = "unite", label = textOutput("generateReportLabel", inline=TRUE),
       size = "lg", inputId = "generatereport", width = "20vw", class = "fixedButton"),
-   bottom = "2.5%", left = "50%", fixed = TRUE, width = "auto",
-   style = "transform: translate(-50%, +0%); z-index: 1000;"),
-
+    bottom = "2.5%", left = "50%", fixed = TRUE, width = "auto",
+    style = "transform: translate(-50%, +0%); z-index: 1000;"),
+  
+  # tooltip for the dropdown
+  uiOutput("generateReportTooltip"),
+  
   # Open window for a preview
-  shinyBS::bsModal(id = "previewer", title = "Preview", trigger = "preview", size = "large",
+  shinyBS::bsModal(id = "previewer", title = textOutput("previewLabel2", inline=TRUE), trigger = "preview", size = "large",
                    shinycssloaders::withSpinner(uiOutput("generatePreview"))),
 
   # Open window for a code
-  shinyBS::bsModal(id = "codeshower", title = "Code", trigger = "showcode", size = "large",
+  shinyBS::bsModal(id = "codeshower", title = textOutput("codeLabel", inline=TRUE), trigger = "showcode", size = "large",
                    shinycssloaders::withSpinner(verbatimTextOutput("code"))),
 
   # Show tooltip which says that the download is not ready
-  shinyBS::bsTooltip(id = "report",
-                     title = "A report can be downloaded after all questions in each section have been answered.",
-                     # Please, respond to all displayed items to download the pdf report (comments are optional).
-                     trigger = "manual",
-                     placement = "right"),
+  uiOutput("reportTooltip"),
   uiOutput("trigger"), # this trigger displays or hides the explaining tooltip
   br(), br(),
 
   # info modal
-  shinyBS::bsModal(id = "intro", title = "About", trigger = "triggerIntro", size = "large",
-                   includeMarkdown("www/doc/introText.Rmd"),
+  shinyBS::bsModal(id = "intro", title = textOutput("aboutLabel", inline=TRUE), trigger = "triggerIntro", size = "large",
+                   #includeMarkdown("www/doc/introText.Rmd"),
+                   uiOutput("introText"),
                    br(),
-                   tags$a(tags$img(src = "img/GitHub-Mark-32px.png"), 
-                          href = "https://github.com/BalazsAczel/TransparencyChecklist", 
+                   tags$a(tags$img(src = "img/GitHub-Mark-32px.png"),
+                          href = "https://github.com/BalazsAczel/TransparencyChecklist",
                           target = "_blank")),
   absolutePanel(
-    actionBttn(inputId = "triggerIntro", label = "About", icon = icon("info-circle")),
+    actionBttn(inputId = "triggerIntro", label = textOutput("aboutLabel2", inline=TRUE), icon = icon("info-circle")),
     top = "3%", left = "2%", fixed = TRUE, width = "auto"
+  ),
+  
+  absolutePanel(
+    selectInput("language", textOutput("selectLanguage", inline=TRUE), languageList, width = "auto"),
+    top = "3%", right = "2%", fixed = TRUE, width = "auto"
   )
-  # temporary (for debugging): showing the current status of the answers
+  #temporary (for debugging): showing the current status of the answers
   # ,br(),
   # verbatimTextOutput("answers")
   )
