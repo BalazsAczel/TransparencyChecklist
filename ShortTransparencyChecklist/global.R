@@ -17,7 +17,9 @@ source("R/validation.R")
 source("R/renderPDF.R")
 source("R/dropdown.R")
 
+# translations are stored here
 i18n <- shiny.i18n::Translator(translation_json_path = "data/translations.json")
+
 # First, we load the .json, which defines the structure of the application
 questions <- jsonlite::read_json(path = "data/questionsShort.json")
 headList <- questions$Head

@@ -1,0 +1,176 @@
+{
+  "languages": [
+    ["en"],
+    ["cz"]
+  ],
+  "translation": [
+    {
+      "en": ["CREATING TRANSPARENCY CHECKLIST 1.0 (short, 12 items)"],
+      "cz": ["VYKAZ TRANSPARENTNOSTI 1.0 (kratky, 12 polozek)"]
+    },
+    {
+      "en": ["I prefer to fill out the full (36-item) checklist."],
+      "cz": ["Preferuji vyplnit kompletni (36 polozek) vykaz."]
+    },
+    {
+      "en": ["Select Language"],
+      "cz": ["Vyberte Jazyk"]
+    },
+    {
+      "en": ["Please select an answer for each item below. If you want to elaborate on your answers, you can do so in the comment box that follows each section."],
+      "cz": ["Prosime vyberte odpoved pro kazdou polozku. Pokud chcete blize vysvetlit sve odpovedi, muzete tak ucinit v poli pro komentare na konci kazde sekce."]
+    },
+    {
+      "en": ["Go to previous section"],
+      "cz": ["Prejit do predchozi sekce"]
+    },
+    {
+      "en": ["Go to next section"],
+      "cz": ["Prejit do nasledujici sekce"]
+    },
+    {
+      "en": ["Generate & Download Report"],
+      "cz": ["Vygenerovat a stahnout zpravu"]
+    },
+    {
+      "en": ["Format"],
+      "cz": ["Format"]
+    },
+    {
+      "en": ["Preview"],
+      "cz": ["Nahled"]
+    },
+    {
+      "en": ["Show code"],
+      "cz": ["Zobrazit kod"]
+    },
+    {
+      "en": ["Download"],
+      "cz": ["Stahnout"]
+    },
+    {
+      "en": ["Click here to create and download report"],
+      "cz": ["Kliknete zde pro vytvoreni a stazeni zpravy"]
+    },
+    {
+      "en": ["Generate Report"],
+      "cz": ["Vytvorit zpravu"]
+    },
+    {
+      "en": ["Code"],
+      "cz": ["Kod"]
+    },
+    {
+      "en": ["A report can be downloaded after all questions in each section have been answered."],
+      "cz": ["Zprava muze byt stazena pote, co jsou zodpovezeny vsechny polozky ve vsech sekcich."]
+    },
+    {
+      "en": ["About"],
+      "cz": ["O aplikaci"]
+    },
+    {
+      "en": ["What is the Transparency Checklist?"],
+      "cz": ["Co je vykaz transparentnosti?"]
+    },
+    {
+      "en": ["Title of the Study"],
+      "cz": ["Název studie"]
+    },
+    {
+      "en": ["All Authors [Given name(s) Surname;]"],
+      "cz": ["Všichni autoři [Křestní jméno Příjmení;]"]
+    },
+    {
+      "en": ["Corresponding author's email address"],
+      "cz": ["Korespondence na e-mail"]
+    },
+    {
+      "en": ["Link to Project Repository"],
+      "cz": ["Odkaz na repositář projektu"]
+    },
+    {
+      "en": ["PREREGISTRATION SECTION"],
+      "cz": ["PREDREGISTRACE"]
+    },
+    {
+      "en": ["(1) Prior to analyzing the complete data set, a time-stamped preregistration was posted in an independent, third-party registry for the data analysis plan."],
+      "cz": ["(1) Pred analyzou kompletnich dat byla predregistrace s casovou znamkou ulozena na nezavislem registru pro datovou analyzu."]
+    },
+    {
+      "en": ["(2) The study was preregistered..."],
+      "cz": ["(2) Studie byla predregistovana..."]
+    },
+    {
+      "en": ["Explain"],
+      "cz": ["Vysvetlete"]
+    },
+    {
+      "en": ["The preregistration fully describes..."],
+      "cz": ["Predregistrace popisuje vycerpavajicim zpusobem..."]
+    },
+    {
+      "en": ["(3) the intended statistical analysis for each research question (this may require, for example, information about the sidedness of the tests, inference criteria, corrections for multiple testing, model selection criteria, prior distributions etc.)."],
+      "cz": ["(3) zamyslenou statistickou analyzu pro kazdou vyzkumnou otazku (toto napriklad vyzaduje informace o smeru testu, critetia inference, korekce pro vice testovani, kriteria pro vyber modelu, a-priorni distribuce, apod.)"]
+    },
+    {
+      "en": ["Comments about your Preregistration"],
+      "cz": ["Komentar k Vasi predregistraci"]
+    },
+    {
+      "en": ["Write your comments here..."],
+      "cz": ["Piste komentar zde..."]
+    },
+    {
+      "en": ["The manuscript fully describes..."],
+      "cz": ["Manuskript popisuje vycerpacajicim zpusobem..."]
+    },
+    {
+      "en": ["Yes"],
+      "cz": ["Ano"]
+    },
+    {
+      "en": ["No"],
+      "cz": ["Ne"]
+    },
+    {
+      "en": ["NA"],
+      "cz": ["NA"]
+    },
+    {
+      "en": ["Please select an option"],
+      "cz": ["Prosime, vyberte odpoved"]
+    },
+    {
+      "en": ["before any data were collected."],
+      "cz": ["pred sberem dat."]
+    },
+    {
+      "en": ["after some data were collected, but before exploring the data."],
+      "cz": ["po castecnem sberu dat, ale pred exploraci v datech."]
+    },
+    {
+      "en": ["after all data were collected, but before exploring the data."],
+      "cz": ["po kompletnim sberu dat, ale pred exploraci v datech."]
+    },
+    {
+      "en": ["after exploring the data, but before any statistical analyses were conducted."],
+      "cz": ["po exploraci v datech, ale pred jakoukoli statistickou analyzou."]
+    },
+    {
+      "en": ["after some but not all statistical analyses were conducted."],
+      "cz": ["po nejake statisticke analyze, and ne po vsech."]
+    },
+    {
+      "en": ["at another time, explain:"],
+      "cz": ["jindy, vysvetlete:"]
+    },
+    {
+      "en": ["Not answered"],
+      "cz": ["Nezodpovezeno"]
+    },
+    {
+      "en": ["References"],
+      "cz": ["Reference"]
+    }
+  ]
+}
