@@ -110,6 +110,14 @@
         "cz": "(3) zamyslenou statistickou analyzu pro kazdou vyzkumnou otazku (toto napriklad vyzaduje informace o smeru testu, critetia inference, korekce pro vice testovani, kriteria pro vyber modelu, a-priorni distribuce, apod.)"
       },
       {
+        "en": "Comments about your Preregistration",
+        "cz": "Komentar k Vasi predregistraci"
+      },
+      {
+        "en": "Write your comments here...",
+        "cz": "Piste komentar zde..."
+      },
+      {
         "en": "The manuscript fully describes...",
         "cz": "Manuskript popisuje vycerpacajicim zpusobem..."
       },

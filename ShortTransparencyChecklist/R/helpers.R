@@ -84,7 +84,8 @@ customButton <- function(ind, answers = NULL){
                        fluidRow(column(1),
                                 column(10, br(), strong(i18n$t(ind$Label)), br(),
                                        tags$style(type = "text/css", "textarea {width:80%}"),
-                                       tags$textarea(id = ind$Name, placeholder = ind$AnswerType,
+                                       tags$textarea(ifelse(is.null(answers[[ind$Name]]), "", answers[[ind$Name]]),
+                                                     id = ind$Name, placeholder = i18n$t(ind$AnswerType),
                                                      rows = 5, class = "form-control")),
                                 column(1)))
     #)
