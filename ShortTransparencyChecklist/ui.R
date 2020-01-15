@@ -129,7 +129,7 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   ),
   
   absolutePanel(
-    selectInput("language", textOutput("selectLanguage", inline=TRUE), list(English = "en", Česky = "cz"), width = "auto"),
+    selectInput("language", textOutput("selectLanguage", inline=TRUE), languageList, width = "auto"),
     top = "3%", right = "2%", fixed = TRUE, width = "auto"
   )
   #temporary (for debugging): showing the current status of the answers
