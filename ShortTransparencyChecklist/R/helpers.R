@@ -33,12 +33,12 @@ customField <- function(ind, answers = NULL){
     # the guidance text can itself be conditional
     if(is.null(ind$Depends)){
       fluidRow(column(1),
-               column(10, br(), strong(i18n$t(ind$Label))),
+               column(10, br(), strong(translateLabel(ind$Label))),
                column(1))
     } else{
       conditionalPanel(condition = gsub(pattern = "\\.", replacement = "input.", ind$Depends),
                        fluidRow(column(1), 
-                                column(10, br(), strong(i18n$t(ind$Label))),
+                                column(10, br(), strong(translateLabel(ind$Label))),
                                 column(1))
                        )
     }
@@ -62,7 +62,7 @@ customButton <- function(ind, answers = NULL){
     fluidPage( # wrapping into another fluid page makes a slight indentation of the questions from the text fields
     conditionalPanel(condition = ind$Depends,
                      fluidRow(column(1),
-                              column(6, br(), i18n$t(ind$Label)),#, 
+                              column(6, br(), translateLabel(ind$Label)),#, 
                                      #a(ind$href, href = ind$href, target = "_blank"),
                                      #ind$LabelEnd), # this makes the buttons appear horizonally aligned
                               column(3, switchButtons(ind, answers)), # create a standard shiny button
@@ -82,7 +82,7 @@ customButton <- function(ind, answers = NULL){
     #fluidPage(
       conditionalPanel(condition = ind$Depends,
                        fluidRow(column(1),
-                                column(10, br(), strong(i18n$t(ind$Label)), br(),
+                                column(10, br(), strong(translateLabel(ind$Label)), br(),
                                        tags$style(type = "text/css", "textarea {width:80%}"),
                                        tags$textarea(ifelse(is.null(answers[[ind$Name]]), "", answers[[ind$Name]]),
                                                      id = ind$Name, placeholder = i18n$t(ind$AnswerType),
@@ -124,7 +124,7 @@ switchButtons <- function(ind, answers = NULL){
                               options = pickerOptions(noneSelectedText = i18n$t("Please select an option"))),
     "radio"     = radioButtons(inputId = ind$Name, label = "", choices = answerOptions, selected = ifelse(is.null(selected), 0, selected),
                                inline = TRUE),
-    "textInput" = textInput(inputId = ind$Name, label = i18n$t(ind$Label), value = ifelse(is.null(selected), i18n$t(ind$AnswerType), selected)),
+    "textInput" = textInput(inputId = ind$Name, label = translateLabel(ind$Label), value = ifelse(is.null(selected), i18n$t(ind$AnswerType), selected)),
     "textArea"  = textAreaInput(inputId = ind$Name, label = "", placeholder = answerOptions, rows = 6, value = ifelse(is.null(selected), "", selected))
   )
 }
@@ -138,4 +138,15 @@ getItemList <- function(sectionsList, all = TRUE){
   } else {
     return(items[grep("ind", items)])
   }
+}
+
+translateLabel <- function(label){
+  if(label == "") return(label)
+  # browser()
+  # translates labels with numbers indexing the item number (i.e., '(1) Participants something...')
+  txt <- gsub("^\\([0-9]+\\) ", "", label)
+  translated_txt <- i18n$t(txt)
+  translated_label <- gsub(txt, translated_txt, label, fixed = TRUE)
+  
+  return(translated_label)
 }

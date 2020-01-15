@@ -393,7 +393,7 @@ shinyServer(function(input, output, session) {
              tags$a("doi:10.1038/s41562-019-0772-6", href = "https://doi.org/10.1038/s41562-019-0772-6", target = "_blank")),
       tags$hr(),
 
-      tags$p(i18n$t("* Feedback and recommendations for an update of the checklist can be provided here:"),
+      tags$p(i18n$t("Feedback and recommendations for an update of the checklist can be provided here:"),
              tags$a("https://forms.gle/raN7q1ucpov5sX316", href = "https://forms.gle/raN7q1ucpov5sX316", target = "_blank"))
     )
   })

@@ -189,7 +189,7 @@
         },
         {
           "Type": "radio",
-          "Label": "any changes to the preregistration (such as changes in eligibility criteria, group membership cutoffs, or experimental procedures)?",
+          "Label": "any changes to the preregistration (such as changes in eligibility criteria, group membership cutoffs, or experimental procedures).",
           "AnswerType": "YesNo",
           "Depends": ".ind_1 == 'Yes'"
         },

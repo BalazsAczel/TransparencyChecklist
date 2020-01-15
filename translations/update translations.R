@@ -1,0 +1,6 @@
+source("TransparencyChecklist/translations/functions.R")
+df <- read.csv("TransparencyChecklist/translations/Translations - Transparency Checklist.csv", na.strings = " ")
+lst <- df2list(df)
+jsonlite::write_json(lst, "TransparencyChecklist/translations/translations.json", pretty=TRUE)
+jsonlite::write_json(lst, "TransparencyChecklist/TransparencyChecklist/data/translations.json", pretty=TRUE)
+jsonlite::write_json(lst, "TransparencyChecklist/ShortTransparencyChecklist/data/translations.json", pretty=TRUE)

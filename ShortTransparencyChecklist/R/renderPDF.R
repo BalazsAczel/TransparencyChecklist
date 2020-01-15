@@ -82,7 +82,8 @@ output: pdf_document
   # fill in answers with "not answered" - important for generating the files
   bundleQuestions <- getItemList(sectionsList)
   not.answered <- !bundleQuestions %in% names(answers)
-  answers[bundleQuestions[not.answered]] <- i18n$t("Not answered")
+  notAnsweredLabel <- i18n$t("Not answered")
+  answers[bundleQuestions[not.answered]] <- notAnsweredLabel
   
   # We create sections of the rmd file
   sections <- sapply(sectionsList, composeSections, answers = answers)
@@ -180,7 +181,7 @@ composeQuestions <- function(question, answers = answers){
   }
   
   if( !(question$Type %in% c("comment", "text"))){
-    label <- paste0(" ", i18n$t(question$Label), " &escape&hfill")
+    label <- paste0(" ", translateLabel(question$Label), " &escape&hfill")
   } else if(question$Type == "text" || (question$Type == "comment" && question$Label != "Explain")){
     if(question$Label == ""){
       label <- paste0("\n")

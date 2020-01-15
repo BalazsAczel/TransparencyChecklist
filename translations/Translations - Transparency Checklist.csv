@@ -1,0 +1,106 @@
+en,cz
+English,Česky
+Provided email appears invalid.,E-mailová adresa se zdá býti neplatná.
+The link cannot be accessed.,Odkaz není přístupný.
+"Word and rtf files cannot be previewed in the browser, displaying markdown file","Word a rtf soubory není možné zobrazit v náhledu, místo nich je zobrazen markdown soubor"
+Transparency Checklist,Výkaz transparentnosti
+"CREATING TRANSPARENCY CHECKLIST 1.0 (full, 36 items)","VÝKAZ TRANSPARENTNOSTI 1.0 (kompletní, 36 položek)"
+I prefer to fill out the short (12-item) checklist.,Preferuji vyplnit krátký (12 položek) výkaz.
+"CREATING TRANSPARENCY CHECKLIST 1.0 (short, 12 items)","VÝKAZ TRANSPARENTNOSTI 1.0 (krátký, 12 položek)"
+I prefer to fill out the full (36-item) checklist.,Preferuji vyplnit kompletní (36 položek) výkaz.
+Select Language,Vyberte Jazyk
+"Please select an answer for each item below. If you want to elaborate on your answers, you can do so in the comment box that follows each section.","Prosíme, vyberte odpověd pro každou položku. Pokud chcete vysvětlit své odpovědi blíže, můžete tak učinit v poli pro komentáře na konci každé sekce."
+Go to previous section,Přejít do předchozí sekce
+Go to next section,Přejít do následující sekce
+Generate & Download Report,Vygenerovat a stáhnout zprávu
+Format,Formát
+Preview,Náhled
+Show code,Zobrazit kód
+Download,Stáhnout
+Click here to create and download report,Klikněte zde pro vytvoření a stažení zprávy
+Generate Report,Vytvořit zprávu
+Code,Kód
+A report can be downloaded after all questions in each section have been answered.,"Zpráva může být stažena poté, co jsou zodpovezeny všechny položky ve všech sekcích."
+About,O aplikaci
+What is the Transparency Checklist?,Co je výkaz transparentnosti?
+"The Transparency Checklist is a comprehensive checklist that researchers can use to improve and document the transparency of their research. This checklist was developed for social and behavioral scientists who conduct and report confirmatory research on primary data. Nevertheless, several of the checklist items may also be relevant for other approaches and disciplines. For purely exploratory research, only the last 5 items of this short checklist apply.","Výkaz transparence je zevrubný seznam, který mohou výzkumníci použít ke zlepšení a dokumentace transparency jejich výzkumu."
+How to use it?,Jak ho použít?
+The checklist refers to a single study of interest.,Výkaz se týká individuální studie.
+"Please respond to each checklist item. If necessary, you can provide an explanation at the end of each section.","Prosíme, odpovězte na všechny položky. Pokud je to nutné, můžete vysvětlit své odpovědi na konci každé sekce. "
+"When the question refers to your manuscript, this includes all supplementary materials and appendices that are relevant to the study of interest.","Pokud se položka týká vašeho článku, myslí se tím všechny dodatečné materiály a apendixy které se týkají konkrétní studie. "
+"After all the questions have been answered, you can generate a transparency report for your study by pressing the button labeled GENERATE REPORT at the bottom of the page.","Až odpovíte na všechny položky, můžete vygenerovat zprávu pro svou studii stistnutím tlačítka Vygenerovat a stáhnout zprávu dole na stránce."
+"Save your transparency report on your computer. Note that after you download your report, your responses on the checklist will not be saved by our webpage.",Uložte si zprávu na svůj počítač. Po stáhnutí Vaší zprávy se Vaše odpovědi nikam neukládají (stránka neukládá žádná data).
+Upload your transparency report to a public repository.,Nahrajte Vaši zprávu na veřejný repositář.
+You can cite the Transparency Checklist as follows:,Výkaz transparence můžete citovat následujícím způsobem:
+Feedback and recommendations for an update of the checklist can be provided here:,Zpětnou vazbu a doporučení k této aplikaci můžete zaslat zde:
+Title of the Study,Název studie
+All Authors [Given name(s) Surname;],Všichni autoři [Křestní jméno Příjmení;]
+Corresponding author's email address,Korespondence na e-mail
+Link to Project Repository,Odkaz na repositář projektu
+PREREGISTRATION SECTION,PŘEDREGISTRACE
+"Prior to analyzing the complete data set, a time-stamped preregistration was posted in an independent, third-party registry for the data analysis plan.",Před analýzou kompletních dat byla předregistrace s časovou známkou uložena na nezávislém registru.
+The manuscript includes a URL to all preregistrations that concern the present study.,Článek obsahuje URL odkaz na všechny předregistrace týkající se této studie.
+The study was preregistered...,Studie byla předregistována...
+Please select an option,"Prosíme, vyberte odpověd"
+before any data were collected.,před sběrem dat.
+"after some data were collected, but before exploring the data.","po částecnem sběru dat, ale před explorací v datech."
+"after all data were collected, but before exploring the data.","po kompletním sběru dat, ale před explorací v datech."
+"after exploring the data, but before any statistical analyses were conducted.","po exploraci v datech, ale před jakoukoli statistickou analýzou."
+after some but not all statistical analyses were conducted.,"po nějaké statistické analýze, and ne po všech."
+"at another time, explain:","jindy, vysvětlete:"
+Explain,Vysvětlete
+The preregistration fully describes...,Předregistrace popisuje vyčerpávajicím způsobem...
+"all inclusion and exclusion criteria for participation (e.g., English speakers who achieved a certain cutoff score in a language test).",všechna kritéria pro zařazení či vyřazení účastníků (např. účastníci s určitým skóre v jazykovém testu)
+all procedures for assigning participants to conditions.,všechny procedury pro přiřazování účastníků to skupin.
+all procedures for randomizing stimulus materials.,všechny procedury pro znáhodnění stimulů.
+"any procedures for ensuring that participants, experimenters, and data-analysts were kept naive (blinded) to potentially biasing information.","jakékoli procedury použity za účelem zaslepit účastníky, administrátory, a data analytiky vůči potenciálně zkreslujícím informacím."
+"a rationale for the sample size used (e.g., an a priori power analysis).",zdůvodnění velikosti vzorku (např. analýza statistické síly).
+"the measures of interest (e.g., friendliness).",měřené proměnné (např. přátelskost).
+"all operationalizations for the measures of interest (e.g., a questionnaire measuring friendliness).",všechny operacionalizace měřených proměnných (např. inventář měřící přátelskost).
+"the data preprocessing plans (e.g., transformed, cleaned, normalized, smoothed).","plánované úpravy dat (např. transformace, čištění, normalizace, vyhlazování)."
+"how missing data (e.g., dropouts) were planned to be handled.",jak bude naloženo s chybějícími daty (např. odpadlíci).
+"the intended statistical analysis for each research question (this may require, for example, information about the sidedness of the tests, inference criteria, corrections for multiple testing, model selection criteria, prior distributions etc.).","zamýšlenou statistickou analýzu pro každou výzkumnou otázku (toto například vyžaduje informace o směru testu, kritéria inference, korekce pro vícečetné testování, kritéria pro výběr modelu, apriorní distribuce, apod.)"
+Comments about your Preregistration,Komentář k Vaší předregistraci
+METHODS SECTION,METODIKA
+The manuscript fully describes...,Článek popisuje vyčerpávajícím způsobem...
+"the rationale for the sample size used (e.g., an a priori power analysis).",zdůvodnění velikosti vzorku (např. analýza statistické síly).
+how participants were recruited.,jak byli ůčastníci rekrutováni.
+"how participants were selected (e.g., eligibility criteria).",jak byli ůčastníci vybráni (např. kritéria pro zařazení do studie).
+what compensation was offered for participation.,jaká byla kompenzace za zúčastnění se ve studii.
+"how participant dropout was handled (e.g., replaced, omitted, etc).","jak bylo naloženo s chybějícími účastníky (např. nahrazení, vyřazení, apod.)."
+how participants were assigned to conditions.,jak byli účastníci přiřazeni do skupin.
+how stimulus materials were randomized.,jak byly stimuly znáhodněné.
+"whether (and, if so, how) participants, experimenters, and data-analysts were kept naive to potentially biasing information.","zda (a pokud ano, jak) byli účasntíci, administrátoři, a data analytici zaslepeni vůči potenciálně zkreslujícím informacím."
+"the study design, procedures, and materials to allow independent replication.","design studie, procedury, a materiály pro umožnění nezávislé replikace."
+"the measures of interest (e.g., friendliness) and their operationalizations (e.g., a questionnaire measuring friendliness).",měřené proměnné (např. přátelskost) a jejich operacionalizace (např. inventář měřící přátelskost).
+"any changes to the preregistration (such as changes in eligibility criteria, group membership cutoffs, or experimental procedures).","jakékoli změny oproti předregistraci (jako například změna kritérií pro zařazení do studie, kritéria pro rozřazení do skupin, nebo experimentální procedura)."
+Comments about your Methods section,Komentář k Vaší metodice
+RESULTS AND DISCUSSION SECTION,VÝSLEDKY A DISKUSE
+The manuscript...,Článek...
+"distinguishes explicitly between ""confirmatory"" (i.e., prespecified) and ""exploratory"" (i.e., not prespecified) analyses.","explicitně rozlišuje mezi ""konfirmační"" (naplánované) a ""explorační"" (nenaplánované) analýzou."
+describes how violations of statistical assumptions were handled.,popisuje jak bylo naloženo s nenaplněnými statistickými předpoklady.
+"justifies all statistical choices (e.g., including or excluding covariates; applying or not applying transformations; use of multi-level models vs. ANOVA).",zdůvodňuje všechny statistické volby (např. zařazení či přiřazení kovariátů; aplikování transformací; použití víceúrovňových modelů).
+reports the sample size for each cell of the design.,popisuje velikost vzorku v každé skupině.
+reports how incomplete or missing data were handled.,popisuje jak bylo naloženo s chybějícímy daty.
+"presents protocols for data preprocessing (e.g., cleaning, discarding of cases and items, normalizing, smoothing, artifact correction).","předkládá protokoly pro úpravy dat (např. čištění, vyloučení pozorování či položek, normalizace, vyhlazení, či korekce artefaktů)."
+Comments about your Results and Discussion,Komentář k Vašim výsledkům a diskusi
+"DATA, CODE, AND MATERIALS AVAILABILITY SECTION","PŘÍSTUPNOST DAT, KÓDU A MATERIÁLŮ"
+The following have been made publicly available...,Položky níže byly zpřístupněny veřejnosti...
+"the (processed) data, on which the analyses of the manuscript were based.","(očištěná) data, na kterých jsou založeny výsledky popsané v článku."
+all code and software (that is not copyright protected).,všechen kód a software (který není chráněn autorským právem).
+"all instructions, stimuli, and test materials (that are not copyright protected).","všechny instrukce, stimuly, a materiály (které nejsou chráněny autorským právem)."
+"Are the data properly archived (i.e., would a graduate student with relevant background knowledge be able to identify each variable and reproduce the analysis)?",Jsou všechna data řádně archivovaná (byl by student s relevantní znalostí tématu schopen určit všechny proměnné a zreprodukovat analýzu)?
+"The manuscript includes a statement concerning the availability and location of all research items, including data, materials, and code relevant to the study.","Článek obsahuje prohlášení o přístupnosti a lokaci všech výzkumných položek, včetně dat, materiálů, a kódu."
+"Comments about your Data, Code, and Materials","Komentář k přístupnosti dat, kódu a materiálů"
+Write your comments here...,Pište komentář zde...
+Provide an explanation here...,Vysvětlete zde...
+Yes,Ano
+No,Ne
+N/A,N/A
+Untitled,Bez názvu
+"Transparency Report 1.0 (full, 36 items)","Zpráva Transparence (kompletní, 36 položek)"
+"Transparency Report 1.0 (short, 12 items)","Zpráva Transparence (krátká, 12 položek)"
+Not answered,Nezodpovězeno
+No comments.,Žádný komentář.
+This question needs to be answered.,Tato položka je povinná.
+References,Reference

@@ -17,7 +17,7 @@ df2list <- function(x){
   out[['translation']] <- list()
   
   for(i in 1:nrow(x)){
-    out[['translation']][[i]] <- as.list(transdf[i,])
+    out[['translation']][[i]] <- as.list(x[i,])
   }
   
   return(out)
