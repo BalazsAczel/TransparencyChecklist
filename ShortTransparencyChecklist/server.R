@@ -98,6 +98,15 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  # create a tooltip for the Download button
+  output$reportTooltip <- renderUI({
+    tags$script(
+      sprintf(
+        "$(document).ready(function() {setTimeout(function() {shinyBS.addTooltip('report', 'tooltip', {'placement': 'right', 'trigger': 'manual', 'title': '%s'})}, 500)});",
+        inAppTexts()$reportDownloadableLabel
+        )
+      )
+  })
   # whenever the input is not complete, show the tooltip for explanation for the download button
   output$trigger <- renderUI({
     if(isDownloadable()){
@@ -106,6 +115,16 @@ shinyServer(function(input, output, session) {
       tags$script("$('#report').tooltip('show');")
     }
 
+  })
+  
+  # Tooltip for the dropdown
+  output$generateReportTooltip <- renderUI({
+    tags$script(
+      sprintf(
+        "$('#generatereport').tooltip({ placement: 'left', title: '%s', html: false });",
+        inAppTexts()$clickToDownloadLabel
+      )
+    )
   })
   
   # changing icons when item is answered

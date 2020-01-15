@@ -29,23 +29,20 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   
   #### Application outline ----
   # Application title
-  headerPanel(column(12, uiOutput("applicationTitle"), align = "center"),
+  headerPanel(column(12, textOutput("applicationTitle", inline=TRUE), align = "center"),
               windowTitle = "Transparency Checklist 1.0"),
   
   fluidRow(column(1),
-           column(10, tags$a(uiOutput("preferenceOther"), 
+           column(10, tags$a(textOutput("preferenceOther", inline=TRUE), 
                              href="http://www.shinyapps.org/apps/TransparencyChecklist/",
                              target="_blank"), align = "center"),
            column(1)
   ),
   br(), 
-  selectInput("language", uiOutput("selectLanguage"), list("en", "cz")),
   # The header (basic information about the paper and authors)
   fluidRow(
     column(1),
     column(10,
-      #wellPanel(h4(textOutput("currentTime")), br(), headHTML)),
-      #wellPanel(headHTML)),
       wellPanel(uiOutput("head"))),
     column(1)
   ),
@@ -54,7 +51,7 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   fluidRow(
     column(1),
     column(10, 
-           h3(uiOutput("generalInstruction"))
+           h3(textOutput("generalInstruction", inline=TRUE))
            ),
     column(1)
   ),
@@ -63,15 +60,14 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   tags$div(id = "scrollAnchor"), # for scrolling up
   # Show questions
   uiOutput("questions"),
-  #sectionsHTML,
   
   # Switching between sections
   fluidRow(column(2),
            column(2, align = "center",
-                  actionButton("previousButton", uiOutput("goToPrevious"), icon = icon("arrow-circle-left"))),
+                  actionButton("previousButton", textOutput("goToPrevious", inline=TRUE), icon = icon("arrow-circle-left"))),
            column(4),
            column(2, align = "center",
-                  actionButton("nextButton", uiOutput("goToNext"), icon = icon("arrow-circle-right"))),
+                  actionButton("nextButton", textOutput("goToNext", inline=TRUE), icon = icon("arrow-circle-right"))),
            column(2)
   ),
   br(), br(),
@@ -98,11 +94,13 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
       downloadButton('report', textOutput('downloadLabel', inline=TRUE), class = "downbutt"),
       
       icon = icon("file-alt"), up = TRUE, 
-      tooltip = tooltipOptions(title = textOutput("clickToDownloadLabel", inline=TRUE), placement = "left", html=TRUE),
       style = "unite", label = textOutput("generateReportLabel", inline=TRUE),
       size = "lg", inputId = "generatereport", width = "20vw", class = "fixedButton"),
     bottom = "2.5%", left = "50%", fixed = TRUE, width = "auto",
     style = "transform: translate(-50%, +0%); z-index: 1000;"),
+  
+  # tooltip for the dropdown
+  uiOutput("generateReportTooltip"),
   
   # Open window for a preview
   shinyBS::bsModal(id = "previewer", title = textOutput("previewLabel2", inline=TRUE), trigger = "preview", size = "large",
@@ -113,11 +111,7 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
                    shinycssloaders::withSpinner(verbatimTextOutput("code"))),
 
   # Show tooltip which says that the download is not ready
-  shinyBS::bsTooltip(id = "report",
-                     title = textOutput("reportDownloadableLabel", inline=TRUE),
-                     # Please, respond to all displayed items to download the pdf report (comments are optional).
-                     trigger = "manual",
-                     placement = "right"),
+  uiOutput("reportTooltip"),
   uiOutput("trigger"), # this trigger displays or hides the explaining tooltip
   br(), br(),
 
@@ -132,9 +126,14 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   absolutePanel(
     actionBttn(inputId = "triggerIntro", label = textOutput("aboutLabel2", inline=TRUE), icon = icon("info-circle")),
     top = "3%", left = "2%", fixed = TRUE, width = "auto"
+  ),
+  
+  absolutePanel(
+    selectInput("language", textOutput("selectLanguage", inline=TRUE), list(English = "en", Česky = "cz"), width = "auto"),
+    top = "3%", right = "2%", fixed = TRUE, width = "auto"
   )
   #temporary (for debugging): showing the current status of the answers
-  ,br(),
-  verbatimTextOutput("answers")
+  # ,br(),
+  # verbatimTextOutput("answers")
   )
 )
