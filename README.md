@@ -2,6 +2,9 @@
 
 This is a public repository of the consensus-based transparency checklist developed by Aczel, et al. (2019).
 
+This is a `stable` branch that is __not going to change__. This branch contains the original release of the shiny app presented in the screenshots in Aczel, et al. (2019).
+
+
 ### What is the Transparency Checklist?
 
 The Transparency Checklist is a comprehensive checklist that researchers can use to improve and document the transparency of their research. This checklist was developed for social and behavioral scientists who conduct and report confirmatory research on primary data. Nevertheless, several of the checklist items may also be relevant for other approaches and disciplines. 
