@@ -1,7 +1,8 @@
 *.DS_Store
 */rsconnect/
 *.html
-
+*.tex
+*.pdf
 
 translations/original_translations/
 
