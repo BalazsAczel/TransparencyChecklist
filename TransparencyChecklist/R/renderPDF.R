@@ -57,7 +57,16 @@ title: '&studyTitle'
 subtitle: '&subTitle'
 author: '&authorNames'
 date: '&date'
-output: pdf_document
+header-includes:
+  - \\usepackage{ctex}
+  - \\newfontfamily\\arabicfont{Times New Roman}
+  - \\newfontfamily\\cyrillicfont{Times New Roman}
+  - \\newfontfamily\\hebrewfont{Times New Roman}
+  - \\newfontfamily\\greekfont{Times New Roman}
+output: 
+  pdf_document:
+    latex_engine: xelatex
+lang: &languageCode
 ---
   
 &corrAuthorsLabel: [&correspondingEmail](&correspondingEmail)
@@ -67,7 +76,7 @@ output: pdf_document
 
   
   # and fill the header with information taken from the question in the head
-  date <- format(Sys.time(), '%d/%M/%Y')
+  date <- format(Sys.time(), '%d/%m/%Y')
   answers$studyTitle <- ifelse(answers$studyTitle == "", i18n$t("Untitled"), answers$studyTitle)
   
   headYaml <- gsub("&studyTitle",         answers$studyTitle,                                  headYaml)
@@ -75,9 +84,10 @@ output: pdf_document
   headYaml <- gsub("&correspondingEmail", answers$correspondingEmail,                          headYaml)
   headYaml <- gsub("&linkToRepository",   answers$linkToRepository,                            headYaml)
   headYaml <- gsub("&date",               date,                                                headYaml)
-  headYaml <- gsub("&subTitle",           i18n$t("Transparency Report 1.0 (full, 36 items)"), headYaml)
-  headYaml <- gsub("&corrAuthorsLabel",   i18n$t("Corresponding author's email address"),     headYaml)
-  headYaml <- gsub("&linkToRepoLabel",    i18n$t("Link to Project Repository"),               headYaml)
+  headYaml <- gsub("&languageCode",       languageCodes[[answers$language]],                   headYaml)
+  headYaml <- gsub("&subTitle",           i18n$t("Transparency Report 1.0 (full, 36 items)"),  headYaml)
+  headYaml <- gsub("&corrAuthorsLabel",   i18n$t("Corresponding author's email address"),      headYaml)
+  headYaml <- gsub("&linkToRepoLabel",    i18n$t("Link to Project Repository"),                headYaml)
   
   # fill in answers with "not answered" - important for generating the files
   bundleQuestions <- getItemList(sectionsList)
@@ -91,7 +101,6 @@ output: pdf_document
   references <- renderReferences()
   # combine everything together
   rmd <- paste(c(headYaml, sections, references), collapse = "\n")
-  
   
   rmd
 }

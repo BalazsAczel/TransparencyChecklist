@@ -21,6 +21,7 @@ i18n <- shiny.i18n::Translator(translation_json_path = "data/translations.json")
 
 languageList <- as.list(i18n$languages)
 names(languageList) <- c("English", unname(unlist(i18n$translations["English",,drop=TRUE])))
+languageCodes <- jsonlite::read_json("data/language_codes.json")
 
 # First, we load the .json, which defines the structure of the application
 questions <- jsonlite::read_json(path = "data/questions.json")
