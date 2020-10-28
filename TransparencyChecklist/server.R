@@ -329,7 +329,7 @@ shinyServer(function(input, output, session) {
 
   #### Translated buttons ----
   inAppTexts <- reactive({
-    reactTo <- input$language
+    reactTo <- c(input$language, input$languageModal)
     list(
       applicationTitle            = i18n$t("CREATING TRANSPARENCY CHECKLIST 1.0 (full, 36 items)"),
       preferenceOther             = i18n$t("I prefer to fill out the short (12-item) checklist."),
@@ -354,6 +354,7 @@ shinyServer(function(input, output, session) {
   output$applicationTitle            <- renderText({ inAppTexts()$applicationTitle            })
   output$preferenceOther             <- renderText({ inAppTexts()$preferenceOther             })
   output$selectLanguage              <- renderText({ inAppTexts()$selectLanguage              })
+  output$selectLanguageModal         <- renderText({ inAppTexts()$selectLanguage              })
   output$generalInstruction          <- renderText({ inAppTexts()$generalInstruction          })
   output$goToPrevious                <- renderText({ inAppTexts()$goToPrevious                })
   output$goToNext                    <- renderText({ inAppTexts()$goToNext                    })
@@ -371,7 +372,7 @@ shinyServer(function(input, output, session) {
   output$aboutLabel2                 <- renderText({ inAppTexts()$aboutLabel2                 })
 
   output$introText <- renderUI({
-    reactTo <- input$language
+    reactTo <- c(input$language, input$languageModal)
     tags$div(
       h3(i18n$t("What is the Transparency Checklist?")),
       tags$p(i18n$t("The Transparency Checklist is a comprehensive checklist that researchers can use to improve and document the transparency of their research. This checklist was developed for social and behavioral scientists who conduct and report confirmatory research on primary data. Nevertheless, several of the checklist items may also be relevant for other approaches and disciplines. For purely exploratory research, only the last 5 items of this short checklist apply.")),
@@ -396,5 +397,14 @@ shinyServer(function(input, output, session) {
       tags$p(i18n$t("Feedback and recommendations for an update of the checklist can be provided here:"),
              tags$a("https://forms.gle/raN7q1ucpov5sX316", href = "https://forms.gle/raN7q1ucpov5sX316", target = "_blank"))
     )
+  })
+  
+  # link language button in main app and in the about window
+  observe({
+    updateSelectInput(session, "language", selected = input$languageModal)
+  })
+  
+  observe({
+    updateSelectInput(session, "languageModal", selected = input$language)
   })
 })

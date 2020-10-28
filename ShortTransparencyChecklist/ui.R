@@ -117,6 +117,10 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
 
   # info modal
   shinyBS::bsModal(id = "intro", title = textOutput("aboutLabel", inline=TRUE), trigger = "triggerIntro", size = "large",
+                   fluidRow(
+                     column(8),
+                     column(4, selectInput("languageModal", textOutput("selectLanguageModal", inline=TRUE), languageList, width = "auto"))
+                   ),
                    #includeMarkdown("www/doc/introText.Rmd"),
                    uiOutput("introText"),
                    br(),
@@ -130,8 +134,9 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   
   absolutePanel(
     selectInput("language", textOutput("selectLanguage", inline=TRUE), languageList, width = "auto"),
-    top = "3%", right = "2%", fixed = TRUE, width = "auto"
+    top = "3%", right = "2%", fixed = TRUE, width = "10%"
   )
+  
   #temporary (for debugging): showing the current status of the answers
   # ,br(),
   # verbatimTextOutput("answers")
