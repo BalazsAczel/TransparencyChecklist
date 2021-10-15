@@ -17,10 +17,10 @@ source("R/validation.R")
 source("R/renderPDF.R")
 
 # translations are stored here
-i18n <- shiny.i18n::Translator(translation_json_path = "data/translations.json")
+i18n <- shiny.i18n::Translator$new(translation_json_path = "data/translations.json")
 
-languageList <- as.list(i18n$languages)
-names(languageList) <- c("English", unname(unlist(i18n$translations["English",,drop=TRUE])))
+languageList <- as.list(i18n$get_languages())
+names(languageList) <- c("English", unname(unlist(i18n$get_translations()["English",,drop=TRUE])))
 languageCodes <- jsonlite::read_json("data/language_codes.json")
 
 # First, we load the .json, which defines the structure of the application
