@@ -62,7 +62,7 @@ customButton <- function(ind, answers = NULL){
     fluidPage( # wrapping into another fluid page makes a slight indentation of the questions from the text fields
     conditionalPanel(condition = ind$Depends,
                      fluidRow(column(1),
-                              column(6, br(), translateLabel(ind$Label)),#, 
+                              column(6, br(), i18n$t(ind$Label)),#, 
                                      #a(ind$href, href = ind$href, target = "_blank"),
                                      #ind$LabelEnd), # this makes the buttons appear horizonally aligned
                               column(3, switchButtons(ind, answers)), # create a standard shiny button
@@ -116,15 +116,16 @@ switchButtons <- function(ind, answers = NULL){
   } else{
     selected <- NULL
   }
-  
+  #browser()
   # switch between different input types
   switch (ind$Type,
     "select"    = pickerInput(inputId = ind$Name, label = "", choices = c("", answerOptions),
                               selected = selected, multiple = FALSE,
                               options = pickerOptions(noneSelectedText = i18n$t("Please select an option"))),
-    "radio"     = radioButtons(inputId = ind$Name, label = "", choices = answerOptions, selected = ifelse(is.null(selected), 0, selected),
-                               inline = TRUE),
-    "textInput" = textInput(inputId = ind$Name, label = translateLabel(ind$Label), value = ifelse(is.null(selected), i18n$t(ind$AnswerType), selected)),
+    # "radio"     = radioButtons(inputId = ind$Name, label = "", choices = answerOptions, selected = ifelse(is.null(selected), 0, selected),
+    #                            inline = TRUE),
+    "radio" = radioButtonTranslatable(inputId = ind$Name),
+    "textInput" = textInput(inputId = ind$Name, label = i18n$t(ind$Label), value = ifelse(is.null(selected), ind$AnswerType, selected)),
     "textArea"  = textAreaInput(inputId = ind$Name, label = "", placeholder = answerOptions, rows = 6, value = ifelse(is.null(selected), "", selected))
   )
 }
@@ -140,13 +141,41 @@ getItemList <- function(sectionsList, all = TRUE){
   }
 }
 
-translateLabel <- function(label){
-  if(label == "") return(label)
-  # browser()
-  # translates labels with numbers indexing the item number (i.e., '(1) Participants something...')
-  txt <- gsub("^\\([0-9]+\\) ", "", label)
-  translated_txt <- i18n$t(txt)
-  translated_label <- gsub(txt, translated_txt, label, fixed = TRUE)
-  
-  return(translated_label)
+# translateLabel <- function(label){
+#   if(label == "") return(label)
+#    browser()
+#   # translates labels with numbers indexing the item number (i.e., '(1) Participants something...')
+#   txt <- gsub("^\\([0-9]+\\) ", "", label)
+#   translated_txt <- i18n$t(txt)
+#   translated_label <- gsub(txt, translated_txt, label, fixed = TRUE)
+#   
+#   return(translated_label)
+# }
+
+translateLabel <- function(label) {return(label)}
+
+radioButtonTranslatable <- function(inputId, choices) {
+  HTML(sprintf('<div id="%1$s" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="%1$s-label">
+  <label class="control-label" id="%1$s-label" for="%1$s"></label>
+  <div class="shiny-options-group">
+    <div class="radio-inline">
+      <label>
+        <input type="radio" name="%1$s" value="" checked="checked"/>
+        <span class="i18n" data-key="NA">N/A</span>
+      </label>
+    </div>
+    <div class="radio-inline">
+      <label>
+        <input type="radio" name="%1$s" value="Yes"/>
+        <span class="i18n" data-key="Yes">Yes</span>
+      </label>
+    </div>
+    <div class="radio-inline">
+      <label>
+        <input type="radio" name="%1$s" value="No"/>
+        <span class="i18n" data-key="No">No</span>
+      </label>
+    </div>
+  </div>
+</div>', inputId))
 }

@@ -13,6 +13,7 @@ library(markdown)
 library(shiny.i18n)
 
 source("R/helpers.R")
+source("R/uiTemplates.R")
 source("R/validation.R")
 source("R/renderPDF.R")
 
@@ -40,7 +41,7 @@ sectionsList <- lapply(sectionsList, function(Sec){
       x <- c(x, Name = paste0("ind_", ind))
       
       # add the number of the question to the question label
-      x$Label <- paste0("(", ind, ") ", x$Label)
+      # x$Label <- paste0("(", ind, ") ", x$Label)
       ind <<- ind + 1 
     }
     
@@ -57,6 +58,5 @@ sectionsList <- lapply(sectionsList, function(Sec){
 # sectionsHTML <- lapply(sectionsList, renderSection)
 # names(sectionsHTML) <- NULL
 # sectionsHTML <- do.call(tabsetPanel, c(sectionsHTML, id = "sections"))
-# 
-# # write html code for heading
-# headHTML <- lapply(headList, switchButtons)
+#
+
