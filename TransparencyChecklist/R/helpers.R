@@ -82,7 +82,7 @@ customButton <- function(ind, answers = NULL){
     #fluidPage(
       conditionalPanel(condition = ind$Depends,
                        fluidRow(column(1),
-                                column(10, br(), strong(translateLabel(ind$Label)), br(),
+                                column(10, br(), strong(i18n$t(ind$Label)), br(),
                                        tags$style(type = "text/css", "textarea {width:80%}"),
                                        tags$textarea(ifelse(is.null(answers[[ind$Name]]), "", answers[[ind$Name]]),
                                                      id = ind$Name, placeholder = i18n$t(ind$AnswerType),
@@ -102,12 +102,6 @@ switchButtons <- function(ind, answers = NULL){
   } else{ 
     answerOptions <- ind$AnswerType
   }
-  # trans
-  if(is.list(answerOptions)){
-    names(answerOptions) <- lapply(names(answerOptions), i18n$t)
-  } else{
-    answerOptions <- i18n$t(answerOptions)
-  }
   
   # preserve selected values if translation was called
   answered <- ind$Name %in% names(answers)
@@ -122,9 +116,7 @@ switchButtons <- function(ind, answers = NULL){
     "select"    = pickerInput(inputId = ind$Name, label = "", choices = c("", answerOptions),
                               selected = selected, multiple = FALSE,
                               options = pickerOptions(noneSelectedText = i18n$t("Please select an option"))),
-    # "radio"     = radioButtons(inputId = ind$Name, label = "", choices = answerOptions, selected = ifelse(is.null(selected), 0, selected),
-    #                            inline = TRUE),
-    "radio" = radioButtonTranslatable(inputId = ind$Name),
+    "radio"     = radioButtonTranslatable(inputId = ind$Name, choices = answerOptions),
     "textInput" = textInput(inputId = ind$Name, label = i18n$t(ind$Label), value = ifelse(is.null(selected), ind$AnswerType, selected)),
     "textArea"  = textAreaInput(inputId = ind$Name, label = "", placeholder = answerOptions, rows = 6, value = ifelse(is.null(selected), "", selected))
   )
@@ -141,41 +133,29 @@ getItemList <- function(sectionsList, all = TRUE){
   }
 }
 
-# translateLabel <- function(label){
-#   if(label == "") return(label)
-#    browser()
-#   # translates labels with numbers indexing the item number (i.e., '(1) Participants something...')
-#   txt <- gsub("^\\([0-9]+\\) ", "", label)
-#   translated_txt <- i18n$t(txt)
-#   translated_label <- gsub(txt, translated_txt, label, fixed = TRUE)
-#   
-#   return(translated_label)
-# }
 
 translateLabel <- function(label) {return(label)}
 
 radioButtonTranslatable <- function(inputId, choices) {
-  HTML(sprintf('<div id="%1$s" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="%1$s-label">
-  <label class="control-label" id="%1$s-label" for="%1$s"></label>
-  <div class="shiny-options-group">
-    <div class="radio-inline">
-      <label>
-        <input type="radio" name="%1$s" value="" checked="checked"/>
-        <span class="i18n" data-key="NA">N/A</span>
-      </label>
-    </div>
-    <div class="radio-inline">
-      <label>
-        <input type="radio" name="%1$s" value="Yes"/>
-        <span class="i18n" data-key="Yes">Yes</span>
-      </label>
-    </div>
-    <div class="radio-inline">
-      <label>
-        <input type="radio" name="%1$s" value="No"/>
-        <span class="i18n" data-key="No">No</span>
-      </label>
-    </div>
-  </div>
-</div>', inputId))
+  div(id = inputId, class = "form-group shiny-input-radiogroup shiny-input-container", role = "radiogroup", `aria-labelledby` = sprintf("%s-label", inputId),
+      tags$label(class = "control-label", id = sprintf("%s-label", inputId), `for` = inputId),
+      radioButtonTranslatableOptions(choices, inputId))
+}
+
+radioButtonTranslatableOptions <- function(choices, inputId) {
+  options <- list()
+  for(i in seq_along(choices)) {
+    options[[i]] <- radioButtonTranslatableOption(choices[i], inputId)
+  }
+  
+  div(class = "shiny-options-group", options)
+}
+
+radioButtonTranslatableOption <- function(choice, inputId) {
+  div(class = "radio-inline",
+      tags$label(
+        tags$input(type = "radio", name = inputId, value = choice),
+        i18n$t(names(choice))
+        )
+      )
 }
