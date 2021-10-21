@@ -110,16 +110,13 @@ switchButtons <- function(ind, answers = NULL){
   } else{
     selected <- NULL
   }
-  #browser()
+  
   # switch between different input types
   switch (ind$Type,
-    # "select"    = pickerInput(inputId = ind$Name, label = "", choices = c("", answerOptions),
-    #                           selected = selected, multiple = FALSE,
-    #                           options = pickerOptions(noneSelectedText = i18n$t("Please select an option"))),
-    "select"    = pickerInputTranslatable(inputId = ind$Name, choices = answerOptions),
-    "radio"     = radioButtonTranslatable(inputId = ind$Name, choices = answerOptions),
-    "textInput" = textInput(inputId = ind$Name, label = i18n$t(ind$Label), value = ifelse(is.null(selected), ind$AnswerType, selected)),
-    "textArea"  = textAreaInput(inputId = ind$Name, label = "", placeholder = answerOptions, rows = 6, value = ifelse(is.null(selected), "", selected))
+    "select"    = pickerInputTranslatable  (inputId = ind$Name, choices = answerOptions),
+    "radio"     = radioButtonTranslatable  (inputId = ind$Name, choices = answerOptions),
+    "textInput" = textInput                (inputId = ind$Name, label = i18n$t(ind$Label)),
+    "textArea"  = textAreaInputTranslatable(inputId = ind$Name, placeholder = answerOptions, rows = 6)
   )
 }
 
@@ -183,5 +180,13 @@ radioButtonTranslatableOption <- function(choice, inputId) {
         tags$input(type = "radio", name = inputId, value = choice),
         i18n$t(names(choice))
         )
+      )
+}
+
+#' @description This function hard codes html for shiny::textArea with translatable options
+textAreaInputTranslatable <- function(inputId, placeholder, rows) {
+  div(class = "form-group shiny-input-container",
+      tags$label(class = "control-label", id = inputId, `for` = inputId),
+      tags$textarea(class = "form-control", id = inputId, placeholder = "bla", rows = rows)
       )
 }
