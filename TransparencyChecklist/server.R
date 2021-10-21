@@ -332,84 +332,13 @@ shinyServer(function(input, output, session) {
     }
   )
 
-  #### Translated buttons ----
-  # inAppTexts <- reactive({
-  #   reactTo <- c(input$language, input$languageModal)
-  #   list(
-  #     applicationTitle            = i18n$t("CREATING TRANSPARENCY CHECKLIST 1.0 (full, 36 items)"),
-  #     preferenceOther             = i18n$t("I prefer to fill out the short (12-item) checklist."),
-  #     selectLanguage              = i18n$t("Select Language"),
-  #     generalInstruction          = i18n$t("Please select an answer for each item below. If you want to elaborate on your answers, you can do so in the comment box that follows each section."),
-  #     goToPrevious                = i18n$t("Go to previous section"),
-  #     goToNext                    = i18n$t("Go to next section"),
-  #     generateDownloadReportLabel = i18n$t("Generate & Download Report"),
-  #     formatLabel                 = i18n$t("Format"),
-  #     previewLabel                = i18n$t("Preview"),
-  #     showCodeLabel               = i18n$t("Show code"),
-  #     downloadLabel               = i18n$t("Download"),
-  #     clickToDownloadLabel        = i18n$t("Click here to create and download report"),
-  #     generateReportLabel         = i18n$t("Generate Report"),
-  #     previewLabel2               = i18n$t("Preview"),
-  #     codeLabel                   = i18n$t("Code"),
-  #     reportDownloadableLabel     = i18n$t("A report can be downloaded after all questions in each section have been answered."),
-  #     aboutLabel                  = i18n$t("About"),
-  #     aboutLabel2                 = i18n$t("About")
-  #   )
-  # })
-  # output$applicationTitle            <- renderText({ inAppTexts()$applicationTitle            })
-  # output$preferenceOther             <- renderText({ inAppTexts()$preferenceOther             })
-  # output$selectLanguage              <- renderText({ inAppTexts()$selectLanguage              })
-  # output$selectLanguageModal         <- renderText({ inAppTexts()$selectLanguage              })
-  # output$generalInstruction          <- renderText({ inAppTexts()$generalInstruction          })
-  # output$goToPrevious                <- renderText({ inAppTexts()$goToPrevious                })
-  # output$goToNext                    <- renderText({ inAppTexts()$goToNext                    })
-  # output$generateDownloadReportLabel <- renderText({ inAppTexts()$generateDownloadReportLabel })
-  # output$formatLabel                 <- renderText({ inAppTexts()$formatLabel                 })
-  # output$previewLabel                <- renderText({ inAppTexts()$previewLabel                })
-  # output$showCodeLabel               <- renderText({ inAppTexts()$showCodeLabel               })
-  # output$downloadLabel               <- renderText({ inAppTexts()$downloadLabel               })
-  # output$clickToDownloadLabel        <- renderText({ inAppTexts()$clickToDownloadLabel        })
-  # output$generateReportLabel         <- renderText({ inAppTexts()$generateReportLabel         })
-  # output$previewLabel2               <- renderText({ inAppTexts()$previewLabel2               })
-  # output$codeLabel                   <- renderText({ inAppTexts()$codeLabel                   })
-  # output$reportDownloadableLabel     <- renderText({ inAppTexts()$reportDownloadableLabel     })
-  # output$aboutLabel                  <- renderText({ inAppTexts()$aboutLabel                  })
-  # output$aboutLabel2                 <- renderText({ inAppTexts()$aboutLabel2                 })
-
-  # output$introText <- renderUI({
-  #   reactTo <- c(input$language, input$languageModal)
-  #   tags$div(
-  #     h3(i18n$t("What is the Transparency Checklist?")),
-  #     tags$p(i18n$t("The Transparency Checklist is a comprehensive checklist that researchers can use to improve and document the transparency of their research. This checklist was developed for social and behavioral scientists who conduct and report confirmatory research on primary data. Nevertheless, several of the checklist items may also be relevant for other approaches and disciplines. For purely exploratory research, only the last 5 items of this short checklist apply.")),
-  #     tags$br(),
-  #     h3(i18n$t("How to use it?")),
-  #     tags$ul(
-  #       tags$li(i18n$t("The checklist refers to a single study of interest.")),
-  #       tags$li(i18n$t("Please respond to each checklist item. If necessary, you can provide an explanation at the end of each section.")),
-  #       tags$li(i18n$t("When the question refers to your manuscript, this includes all supplementary materials and appendices that are relevant to the study of interest.")),
-  #       tags$li(i18n$t("After all the questions have been answered, you can generate a transparency report for your study by pressing the button labeled GENERATE REPORT at the bottom of the page.")),
-  #       tags$li(i18n$t("Save your transparency report on your computer. Note that after you download your report, your responses on the checklist will not be saved by our webpage.")),
-  #       tags$li(i18n$t("Upload your transparency report to a public repository.")),
-  #     ),
-  #     tags$br(),
-  #     i18n$t("You can cite the Transparency Checklist as follows:"),
-  #     tags$br(),
-  #     tags$p("Aczel, B., Szaszi, B., Sarafoglou, A. Kekecs, Z., Kucharský, Š., Benjamin, D., ... & Wagenmakers, E.-J. (2019). A consensus-based transparency checklist.",
-  #             tags$i("Nature Human Behaviour, "), "1--3.",
-  #            tags$a("doi:10.1038/s41562-019-0772-6", href = "https://doi.org/10.1038/s41562-019-0772-6", target = "_blank")),
-  #     tags$hr(),
-  # 
-  #     tags$p(i18n$t("Feedback and recommendations for an update of the checklist can be provided here:"),
-  #            tags$a("https://forms.gle/raN7q1ucpov5sX316", href = "https://forms.gle/raN7q1ucpov5sX316", target = "_blank"))
-  #   )
-  # })
   
   # link language button in main app and in the about window
-  # observe({
-  #   updateSelectInput(session, "language", selected = input$languageModal)
-  # })
-  # 
-  # observe({
-  #   updateSelectInput(session, "languageModal", selected = input$language)
-  # })
+  observe({
+    updateSelectInput(session, "language", selected = input$languageModal)
+  })
+
+  observe({
+    updateSelectInput(session, "languageModal", selected = input$language)
+  })
 })

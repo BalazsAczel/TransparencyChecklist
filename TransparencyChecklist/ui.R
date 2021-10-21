@@ -66,32 +66,7 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   br(), br(),
   
   ##### Report menu (downloading) ----
-  absolutePanel(
-    dropdown(
-      h4(i18n$t("Generate & Download Report")),
-      pickerInput(inputId = "save.as", label = i18n$t("Format"),
-                  choices = c("pdf", "html", "word", "rtf"),
-                  multiple = FALSE, width = 'auto', inline = FALSE),
-      div(style = "display:inline-block",
-          actionBttn(inputId = "preview", label = i18n$t("Preview"), icon = icon("eye"),
-                     style = "simple",
-                     color = "primary",
-                     size = "xs",
-                     no_outline = FALSE),# br(), br(),
-          actionBttn(inputId = "showcode", label = i18n$t("Show code"), icon = icon("code"),
-                     style = "simple",
-                     color = "primary",
-                     size = "xs",
-                     no_outline = FALSE)
-      ), br(), br(),
-      downloadButton('report', i18n$t('Download'), class = "downbutt"),
-      
-      icon = icon("file-alt"), up = TRUE,
-      tooltip = tooltipOptions(title = i18n$t("Click here to create and download report"), placement = "left"),
-      style = "unite", label = i18n$t("Generate Report"),
-      size = "lg", inputId = "generatereport", width = "20vw", class = "fixedButton"),
-    bottom = "2.5%", left = "50%", fixed = TRUE, width = "auto",
-    style = "transform: translate(-50%, +0%); z-index: 1000;"),
+  generateReportUI(),
   
   # tooltip for the dropdown
   #uiOutput("generateReportTooltip"),
@@ -114,21 +89,12 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
   br(), br(),
 
   # info modal
-  # shinyBS::bsModal(id = "intro", title = textOutput("aboutLabel", inline=TRUE), trigger = "triggerIntro", size = "large",
-  #                  fluidRow(
-  #                    column(8),
-  #                    column(4, selectInput("languageModal", textOutput("selectLanguageModal", inline=TRUE), languageList, width = "auto"))
-  #                  ),
-  #                  #includeMarkdown("www/doc/introText.Rmd"),
-  #                  uiOutput("introText"),
-  #                  br(),
-  #                  tags$a(tags$img(src = "img/GitHub-Mark-32px.png"),
-  #                         href = "https://github.com/BalazsAczel/TransparencyChecklist",
-  #                         target = "_blank")),
-  # absolutePanel(
-  #   actionBttn(inputId = "triggerIntro", label = textOutput("aboutLabel2", inline=TRUE), icon = icon("info-circle")),
-  #   top = "3%", left = "2%", fixed = TRUE, width = "auto"
-  # ),
+  aboutWindowUI(),
+  
+  absolutePanel(
+    actionBttn(inputId = "triggerIntro", label = textOutput("aboutLabel2", inline=TRUE), icon = icon("info-circle")),
+    top = "3%", left = "2%", fixed = TRUE, width = "auto"
+  ),
   
   absolutePanel(
     selectInput("language", i18n$t("Select Language"), languageList, width = "auto"),
