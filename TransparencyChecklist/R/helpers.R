@@ -113,9 +113,10 @@ switchButtons <- function(ind, answers = NULL){
   #browser()
   # switch between different input types
   switch (ind$Type,
-    "select"    = pickerInput(inputId = ind$Name, label = "", choices = c("", answerOptions),
-                              selected = selected, multiple = FALSE,
-                              options = pickerOptions(noneSelectedText = i18n$t("Please select an option"))),
+    # "select"    = pickerInput(inputId = ind$Name, label = "", choices = c("", answerOptions),
+    #                           selected = selected, multiple = FALSE,
+    #                           options = pickerOptions(noneSelectedText = i18n$t("Please select an option"))),
+    "select"    = pickerInputTranslatable(inputId = ind$Name, choices = answerOptions),
     "radio"     = radioButtonTranslatable(inputId = ind$Name, choices = answerOptions),
     "textInput" = textInput(inputId = ind$Name, label = i18n$t(ind$Label), value = ifelse(is.null(selected), ind$AnswerType, selected)),
     "textArea"  = textAreaInput(inputId = ind$Name, label = "", placeholder = answerOptions, rows = 6, value = ifelse(is.null(selected), "", selected))
@@ -136,6 +137,31 @@ getItemList <- function(sectionsList, all = TRUE){
 
 translateLabel <- function(label) {return(label)}
 
+## Translatable widgets ----
+#' @description This function hard codes html for shinyWidgets::pickerInput with translatable options
+pickerInputTranslatable <- function(inputId, choices) {
+  div(class = "form-group shiny-input-container",
+      tags$label(class = "control-label", `for` = inputId),
+      pickerInputTranslatableOptions(choices, inputId)
+      )
+}
+
+pickerInputTranslatableOptions <- function(choices, inputId) {
+  options <- list()
+  for(i in seq_along(choices)) {
+    options[[i]] <- pickerInputTranslatableOption(choices[i])
+  }
+  
+  tags$select(id = inputId, class = "selectpicker form-control",
+              HTML('<option hidden selected><span class="i18n" data-key="Please select an option">Please select an option</span></option>'),
+              options)
+}
+
+pickerInputTranslatableOption <- function(choice) {
+  tags$option(value = choice, i18n$t(names(choice)))
+}
+
+#' @description This function hard codes html for shiny::radioButton with translatable options 
 radioButtonTranslatable <- function(inputId, choices) {
   div(id = inputId, class = "form-group shiny-input-radiogroup shiny-input-container", role = "radiogroup", `aria-labelledby` = sprintf("%s-label", inputId),
       tags$label(class = "control-label", id = sprintf("%s-label", inputId), `for` = inputId),
